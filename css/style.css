@@ -1,0 +1,99 @@
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/right.jpg);
+    background-position: center;
+    font-family: 'montserrat', sans-serif;
+   
+}
+
+/*page1 CSS*/
+
+
+
+/*css page profil*/
+.profile{
+    margin-top:50px;
+    
+    
+   
+    
+    
+}
+h1{
+  
+
+  text-align: center;
+  
+}
+.container{
+   
+    display:flex;
+    flex-direction: column;
+    top:100px ;
+     padding: 20px;
+    height:fit-content;
+   
+}
+.me{
+    padding: 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:fit-content;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    
+    
+}
+.avatar{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+#avatar-preview{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+.champ{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width:80%;
+}
+.folder{
+    
+    padding: 10px;
+}
+
+.face{
+    margin-bottom: 20px;
+}
+.folder{
+    margin-bottom: 20px;
+    font-weight: bold;
+    background-color: dimgrey;
+    border-radius: 15px;
+}
+label{
+    font-weight: bold;
+}
+.fillin{
+    
+    padding:8px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 2px 5px rgba(0, 0, 0, 0.116);
+
+}
