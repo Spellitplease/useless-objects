@@ -64,7 +64,7 @@ session_start();
 			<?php unset($_SESSION['flash']); ?>
 		<?php endif; ?>
 	<div class="main">	
-		<h1 class="intro">Il est temps de choisir...</h1>
+		<h1 class="intro">Liste d'objets inutiles</h1>
 	</div>
 	</div>
 </body>
