@@ -3,48 +3,48 @@
 require_once '../include/database.php';
 
 if (isset($_POST['connexion'])) {
-	// on verifie que les champs ne sont pas vides
-	if (!empty($_POST['mail']) && !empty($_POST['mp'])) {
+    // on verifie que les champs ne sont pas vides
+    if (!empty($_POST['mail']) && !empty($_POST['mp'])) {
 
-		// on recupere les données du formulaire
-		$mail = htmlspecialchars($_POST['mail']);
-		$mp = htmlspecialchars($_POST['mp']);
-		$hashedPassword = password_hash($mp, PASSWORD_DEFAULT);
-		// on verifie que l'utilisateur existe dans la base de données
-		$query = "SELECT * FROM utilisateur WHERE mail = :mail AND mp = :mp";
+        // on recupere les données du formulaire
+        $mail = htmlspecialchars($_POST['mail']);
+        $mp = htmlspecialchars($_POST['mp']);
 
-		$statement = $pdo->prepare($query);
-		$statement->bindValue(':mail', $mail);
-		$statement->bindValue(':mp', $mp);
-		$statement->execute();
+        // on verifie que l'utilisateur existe dans la base de données
+        $query = "SELECT * FROM utilisateur WHERE mail = :mail";
 
-		$user = $statement->fetch(PDO::FETCH_OBJ);
-		// si l'utilisateur existe on le connecte
-		if ($user) {
+        $statement = $pdo->prepare($query);
+        $statement->bindValue(':mail', $mail);
+        $statement->execute();
 
-			session_start();
-			// si l'utilisateur est un admin on le connecte en tant qu'admin
-			if ($user->role == 1) {
+        $user = $statement->fetch(PDO::FETCH_OBJ);
 
-				$_SESSION['admin'] = $user;
-				$_SESSION['flash']['success'] = "Vous êtes connecté en tant qu'administrateur";
-				header('Location: ../page/admin.php');
-				exit();
+        // si l'utilisateur existe on le connecte
+        if ($user && password_verify($mp, $user->mp)) {
 
-			} else { // sinon on le connecte en tant qu'utilisateur
+            session_start();
+            // si l'utilisateur est un admin on le connecte en tant qu'admin
+            if ($user->role == 1) {
 
-				$_SESSION['utilisateur'] = $user;
-				$_SESSION['flash']['success'] = "Vous êtes connecté";
-				header('Location: ../page/profil.php?id='. $_SESSION['utilisateur']->idutilisateur);
-				exit();
+                $_SESSION['admin'] = $user;
+                $_SESSION['flash']['success'] = "Vous êtes connecté en tant qu'administrateur";
+                header('Location: ../page/admin.php');
+                exit();
 
-			}
-		} else { // sinon on affiche un message d'erreur
-			
-			session_start();
-			$_SESSION['flash']['danger'] = "Identifiants ou mot de passe incorrects";
-			header('Location: ../page/connexion.php');
-			exit();
-		}
-	}
+            } else { // sinon on le connecte en tant qu'utilisateur
+
+                $_SESSION['utilisateur'] = $user;
+                $_SESSION['flash']['success'] = "Vous êtes connecté";
+                header('Location: ../page/profil.php?id='. $_SESSION['utilisateur']->idutilisateur);
+                exit();
+
+            }
+        } else { // sinon on affiche un message d'erreur
+
+            session_start();
+            $_SESSION['flash']['danger'] = "Identifiants ou mot de passe incorrects";
+            header('Location: ../page/connexion.php');
+            exit();
+        }
+    }
 }

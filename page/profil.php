@@ -31,6 +31,8 @@ logged_only();
 		<?php endif; ?>
 		<h1>Bienvenue <?= $_SESSION['utilisateur']->nom ?></h1>
 		<p><?= $_SESSION['utilisateur']->mail ?></p>
+		
+		
 		<p>
 			<a href="editionUser.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
 			<a href="../action/deleteUser.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet utilisateur ?!`)" class="btn btn-danger" data-toggle="modal"><i class="bi bi-trash3-fill"></i> Delete</a>

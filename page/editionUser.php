@@ -51,11 +51,15 @@ $user = $statement->fetch(PDO::FETCH_OBJ);
 					<input class="fillin" type="password" name="mp" value="">
 				</div>
 			
-				<?php if (isset($_SESSION['admin'])) : ?>
-					<div class="champ"><label for="role">Votre role</label>
-						<input type="number" name="role" value="<?= $user->role ?>">
-					</div>
-				<?php endif; ?>
+	
+    <?php if (isset($_SESSION['admin'])) : ?>
+    <div class="champ">
+        <label for="role">Votre rôle</label>
+        <input type="text" name="role" value="<?= intval($user->role) ?>">
+    </div>
+	<?php endif; ?>
+
+		
 				<input type="submit" name="edit" value="éditer">
 			</form>
 		</div>

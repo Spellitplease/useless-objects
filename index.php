@@ -17,7 +17,7 @@ session_start();
 
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
-		<div class="container-fluid">
+		<div class="container-fluid ">
 			<a class="navbar-brand" href="#">Navbar</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -52,6 +52,7 @@ session_start();
 					<?php endif; ?>
 				</ul>
 			</div>
+			
 		</div>
 	</nav>
 	<div class="container-fluid pt-3" style="height:100vh;">
@@ -64,9 +65,18 @@ session_start();
 			<?php unset($_SESSION['flash']); ?>
 		<?php endif; ?>
 	<div class="main">	
-		<h1 class="intro">Liste d'objets inutiles</h1>
+		<h1 class="intro">Satané Back-End</h1>
+	
+	<div class="article">
+		<?php
+		include('include/article.php');
+		?>
+	</div> 
+	</div
+
 	</div>
-	</div>
+	
+
 </body>
 
 </html>

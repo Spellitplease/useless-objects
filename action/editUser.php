@@ -13,13 +13,13 @@ if (isset($_POST['edit'])) {
     $mail = $_POST['mail'];
     $mp = $_POST['mp'];
     $mpCrypte = password_hash($mp, PASSWORD_DEFAULT);
-	
-if (empty($mp)) {
-    $_SESSION['flash']['error'] = "Veuillez saisir votre mot de passe.";
-    header("Location: ../page/profil.php?id=" . $id);
-    exit();
-}
+    $avatar = "";
 
+    if (empty($mp)) {
+        $_SESSION['flash']['error'] = "Veuillez saisir votre mot de passe.";
+        header("Location: ../page/profil.php?id=" . $id);
+        exit();
+    }
 
     // Vérification si un fichier est sélectionné
     if ($_FILES['avatar']['name']) {

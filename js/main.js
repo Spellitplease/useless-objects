@@ -5,10 +5,18 @@ function handleAvatarChange(event) {
         reader.onload = function (e) {
             const preview = document.getElementById('avatar-preview');
             preview.src = e.target.result;
-            document.getElementById('avatar-url').value = e.target.result; // Update the hidden input value
+            document.getElementById('avatar-input').value = e.target.result; // Update the hidden input value
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
 document.getElementById('avatar-input').addEventListener('change', handleAvatarChange);
+
+
+
+    
+function showCommentForm(id) {
+    var commentForm = document.getElementById('commentForm' + id);
+    commentForm.style.display = 'block';
+}
