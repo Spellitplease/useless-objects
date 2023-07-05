@@ -1,5 +1,6 @@
 <?php
 require_once '../include/database.php';
+
 session_start();
 
 // Vérifier si l'utilisateur est connecté
@@ -22,14 +23,16 @@ if (isset($_POST['ajouter'])) {
     $idarticle = $_POST['article'];
 
     // Vérifier si l'article existe dans la liste de souhaits de l'utilisateur
-    $query = "SELECT idlisteSouhait FROM listesouhait WHERE Utilisateur_idUtilisateur = :idutilisateur AND idarticle = :idarticle";
+    $query = "SELECT idlisteSouhait FROM listesouhait WHERE Utilisateur_idUtilisateur = :idutilisateur AND article_idarticle = :idarticle";
     $statement = $pdo->prepare($query);
     $statement->execute([':idutilisateur' => $idutilisateur, ':idarticle' => $idarticle]);
     $existingArticle = $statement->fetch(PDO::FETCH_ASSOC);
 
     if (!$existingArticle) {
         // Ajouter l'article à la liste de souhaits de l'utilisateur
-        $query = "INSERT INTO listesouhait (Utilisateur_idUtilisateur, idarticle) VALUES (:idutilisateur, :idarticle)";
+        
+$query = "INSERT INTO listesouhait (Utilisateur_idutilisateur, article_idarticle) VALUES (:idutilisateur, :idarticle)";
+
         $statement = $pdo->prepare($query);
         $statement->execute([':idutilisateur' => $idutilisateur, ':idarticle' => $idarticle]);
 
@@ -41,6 +44,9 @@ if (isset($_POST['ajouter'])) {
     header("Location: wishlist.php");
     exit();
 }
+
+// ...
+
 ?>
 
 <!DOCTYPE html>
@@ -76,5 +82,7 @@ if (isset($_POST['ajouter'])) {
     </form>
 
     <h2>Ma liste de souhaits</h2>
+    <!-- Afficher la liste de souhaits ici -->
+
 </body>
 </html>

@@ -40,6 +40,12 @@ session_start();
 							<a class="nav-link" href="page/profil.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>"><i class="bi bi-person-lines-fill"></i> Profil</a>
 						</li>
 					<?php endif; ?>
+					<?php if (isset($_SESSION['utilisateur'])) : ?>
+						<li class="nav-item">
+							<a class="nav-link" href="page/wishlist.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>"><i class="bi bi-card-text"></i> Ma liste</a>
+						</li>
+					<?php endif; ?>
+					
 					<?php if (isset($_SESSION['admin'])) : ?>
 						<li class="nav-item">
 							<a class="nav-link" href="page/admin.php"><i class="bi bi-database-gear"></i> Admin</a>
@@ -74,7 +80,7 @@ session_start();
 	</div> 
 	</div
 
-	</div>
+	
 	
 
 </body>

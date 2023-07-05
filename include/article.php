@@ -26,6 +26,11 @@ foreach ($utilisateurs as $utilisateur) {
     echo '<div class="utilisateur">';
     echo '<h2>Utilisateur : ' . $utilisateur['nom'] . '</h2>';
 
+    // Afficher l'avatar de l'utilisateur s'il existe
+    if (!empty($utilisateur['avatar']) && $utilisateur['avatar'] !== null) {
+        echo '<img style="width: 200px; border-radius: 50%" src="' . $utilisateur['avatar'] . '" alt="Avatar" >';
+    }
+
     $query = "SELECT * FROM listeSouhait WHERE utilisateur_idutilisateur = :utilisateur_id";
     $statement = $pdo->prepare($query);
     $statement->bindValue(':utilisateur_id', $utilisateur['idutilisateur']);
