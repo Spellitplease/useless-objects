@@ -8,13 +8,14 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
 	<?php include 'base.php'; ?>
 	<title>Connexion</title>
 </head>
 
 <body>
 	<?php include 'menu.php'; ?>
-	<div class="container-fluid pt-3">
+	<div class="container-fluid m-3">
 		<!-- on affiche les messages d'erreur -->
 		<?php if (isset($_SESSION['flash'])) : ?>
 			<?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -24,20 +25,23 @@ session_start();
 			<?php endforeach; ?>
 			<?php unset($_SESSION['flash']); ?>
 		<?php endif; ?>
+		<div class="enter">
 		<h1>Connexion</h1>
-		<form action="../action/login.php" method="post">
+		<form class="connect" action="../action/login.php" method="post">
 
-			<div class="m-2"><label for="mail">Votre email</label>
+			<div class=""><label for="mail">Votre email</label>
 				<input type="email" name="mail">
 			</div>
 
-			<div class="m-2"><label for="mp">Votre mot de passe</label>
+			<div class=""><label for="mp">Votre mot de passe</label>
 				<input type="password" name="mp">
 			</div>
 
-			<div class="m-2"><input type="submit" value="Envoyer" name="connexion"></div>
+			<div class=""><input type="submit" value="Envoyer" name="connexion"></div>
 
 		</form>
+	</div>
+	
 	</div>
 
 </body>

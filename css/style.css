@@ -120,5 +120,15 @@ label{
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
+/*maliste.css*/
+.liste{
+    width:50vw;
+    height: fit-content;  
+}
+.selection{
+    margin: 0 auto;
+}
+
+ 
 
 

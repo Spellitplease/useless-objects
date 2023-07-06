@@ -2,7 +2,7 @@
 require_once '../include/database.php';
 require_once '../include/function.php';
 
-logged_only();
+
 
 $id = $_GET['id'];
 
@@ -25,30 +25,30 @@ $user = $statement->fetch(PDO::FETCH_OBJ);
 <body>
     <?php include 'menu.php'; ?>
     <div class="profile">
-        <h1>Profil Utilisateur</h1>
-        <div class="container">
-            <form class="me" method="post" action="../action/editUser.php?id=<?= $user->idutilisateur ?>">
-                <div class="avatar">
-                    <?php if (!empty($user->avatar) && $user->avatar !== null) : ?>
-                        <img id="avatar-preview" src="<?= $user->avatar ?>" alt="Avatar">
-                    <?php else : ?>
-                        <img id="avatar-preview" src="../images/neutre.jpg" alt="Avatar">
-                    <?php endif; ?>
-                    <label class="face" for="avatar-input">Changer d'avatar</label>
-                    <input class="folder" type="file" id="avatar-input" name="avatar-input" value="change">
-                </div>
-                <div class="champ">
-                    <label for="nom">Votre nom:</label>
-                    <input class="fillin" type="text" name="nom" value="<?= $user->nom ?>">
-                </div>
-                <div class="champ">
-                    <label for="mail">Votre email</label>
-                    <input class="fillin" type="text" name="mail" value="<?= $user->mail ?>">
-                </div>
-                <div class="champ">
-                    <label for="mp">Votre mot de passe</label>
-                    <input class="fillin" type="password" name="mp" value="">
-                </div>
+    <h1>Profil Utilisateur</h1>
+    <div class="container">
+        <form class="me" method="post" action="../action/editUser.php?id=<?= $user->idutilisateur ?>">
+            <div class="avatar">
+                <?php if (!empty($user->avatar) && $user->avatar !== null) : ?>
+                    <img id="avatar-preview" src="<?= $user->avatar ?>" alt="Avatar">
+                <?php else : ?>
+                    <img id="avatar-preview" src="../images/neutre.jpg" alt="Avatar">
+                <?php endif; ?>
+                <label class="face" for="avatar-input">Changer d'avatar</label>
+                <input class="folder" type="text" id="avatar-input" name="avatar-input" value="<?= $user->avatar ?>">
+            </div>
+            <div class="champ">
+                <label for="nom">Votre nom:</label>
+                <input class="fillin" type="text" name="nom" value="<?= $user->nom ?>">
+            </div>
+            <div class="champ">
+                <label for="mail">Votre email</label>
+                <input class="fillin" type="text" name="mail" value="<?= $user->mail ?>">
+            </div>
+            <div class="champ">
+                <label for="mp">Votre mot de passe</label>
+                <input class="fillin" type="password" name="mp" value="">
+            </div>
                 <?php if (isset($_SESSION['admin'])) : ?>
                     <div class="champ">
                         <label for="role">Votre rôle</label>
@@ -59,6 +59,20 @@ $user = $statement->fetch(PDO::FETCH_OBJ);
             </form>
         </div>
     </div>
+    <script>
+function updateAvatarPreview() {
+    var avatarInput = document.getElementById('avatar-input');
+    var avatarPreview = document.getElementById('avatar-preview');
+
+    // Mettre à jour l'aperçu de l'image avec l'URL saisie
+    avatarPreview.src = avatarInput.value;
+}
+
+// Écouter l'événement input pour détecter les modifications de l'input avatar-input
+var avatarInput = document.getElementById('avatar-input');
+avatarInput.addEventListener('input', updateAvatarPreview);
+</script>
+  
     <script src="../js/main.js"></script>
 </body>
 </html>

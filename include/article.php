@@ -4,6 +4,14 @@ $pdo = new PDO('mysql:host=localhost;dbname=souhait', 'root', '', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 
+
+$isAdmin = false;
+if (isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']->role === 'admin') {
+    $isAdmin = true;
+}
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['comment']) && isset($_POST['idcommentaire'])) {
         $comment = $_POST['comment'];
@@ -36,6 +44,7 @@ foreach ($utilisateurs as $utilisateur) {
     $statement->bindValue(':utilisateur_id', $utilisateur['idutilisateur']);
     $statement->execute();
     $listesSouhaits = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
 
     foreach ($listesSouhaits as $listeSouhait) {
         echo '<div class="liste-souhait" style="margin-bottom: 100px;">';
@@ -76,10 +85,14 @@ foreach ($utilisateurs as $utilisateur) {
             echo '</div>';
         }
 
-        echo '<button class="btn btn-primary" style="margin-bottom: 30px;" onclick="showCommentForm(' . $listeSouhait['idlisteSouhait'] . ')">Commenter</button>';
+        // Afficher le bouton de suppression pour l'utilisateur admin
+        if ($isAdmin) {
+            echo '<button class="btn btn-danger" style="margin-bottom: 10px;" onclick="deleteListe(' . $listeSouhait['idlisteSouhait'] . ')">Supprimer</button>';
+        }
 
+        echo '<button class="btn btn-primary" style="margin-bottom: 30px;" onclick="showCommentForm(' . $listeSouhait['idlisteSouhait'] . ')">Commenter</button>';
         echo '<div id="commentForm' . $listeSouhait['idlisteSouhait'] . '" style="display: none;">';
-        echo '<form method="post" action="">'; // Empty action attribute to submit to the same page
+        echo '<form method="post" action="">'; 
         echo '<textarea name="comment" rows="4" cols="50" placeholder="Saisissez votre commentaire ici"></textarea>';
         echo '<input type="hidden" name="idcommentaire" value="' . $listeSouhait['idlisteSouhait'] . '">';
         echo '<input type="submit" value="Submit Comment">';
@@ -91,12 +104,17 @@ foreach ($utilisateurs as $utilisateur) {
 
     echo '</div>'; // Fin de l'utilisateur
 }
-
 ?>
-
 <script>
     function showCommentForm(id) {
         var commentForm = document.getElementById('commentForm' + id);
         commentForm.style.display = 'block';
     }
+
+    function deleteListe(id) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer cette liste de souhaits ?")) {
+            window.location.href = "delete_liste.php?id=" + id;
+        }
+    }
 </script>
+
